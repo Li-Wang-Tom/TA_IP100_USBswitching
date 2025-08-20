@@ -1,0 +1,109 @@
+/*
+
+- File: main.c （超初心者向け解説付き学習版）
+  
+- Target: PIC12F683
+  
+
+- このプログラムの目的：
+  
+- - PICのGP3にスイッチをつなげて、その押下で他のピンの出力をトグル（ON⇔OFF切替）
+- - LEDや外部回路を制御するサンプル
+
+- ポイント：
+  
+- - C言語の基本文法（main関数, while(1), return など）
+- - マイコン特有の設定（#pragma config, #define, TRISIO, GPIOなど）
+- - 命令語や記号の意味をすべてコメントで解説
+    */
+
+#include <stdio.h> // 標準入出力（今回は使わないけどCの基本なので一応）
+#include <stdlib.h> // 標準ライブラリ（EXIT_SUCCESSを使うため）
+#include <xc.h> // マイコン専用ヘッダ（PICのレジスタや命令を使うため）
+
+// ─────────── PICの動作設定（フラッシュ書込み時に反映される）───────────
+// #pragma config は「コンパイル時にマイコンの動作モードを設定する命令」
+#pragma config FOSC = INTOSCIO // 内部クロック使用、GP4/GP5をI/Oピンに
+#pragma config WDTE = OFF // ウォッチドッグタイマ無効
+#pragma config PWRTE = ON // 電源安定待ちタイマ有効
+#pragma config MCLRE = OFF // リセット端子を入力ピンに
+#pragma config CP = OFF // プログラムメモリ保護なし
+#pragma config CPD = OFF // データメモリ保護なし
+#pragma config BOREN = ON // 電圧低下リセット有効
+#pragma config IESO = OFF // クロック自動切替なし
+#pragma config FCMEN = OFF // クロック監視なし
+
+// ─────────── ピンの別名を定義 ───────────
+// #define は「プリプロセッサマクロ」→ コンパイル前に単純置換される
+// 変数ではなく、テキスト置換。
+// 例: LED_SWITCH と書けば、実際には GP2 に置き換わる。
+#define MOUSE_UPPER GP0
+#define MOUSE_LOWER GP5
+#define KEYBOARD_UPPER GP1
+#define KEYBOARD_LOWER GP4
+#define LED_SWITCH GP2
+#define SWITCH_IN GP3
+
+// 遅延関数（__delay_ms）の基準クロック周波数
+// ※ ここで指定する値は「OSCCONで設定した実クロックと一致させる必要」がある
+#define _XTAL_FREQ 1000000UL // 1 MHz (ULはunsigned longの意味、型の安全確保)
+
+// ─────────── main関数（C言語の入口）───────────
+// C言語では必ず main からプログラムが始まる。
+// int main(int argc, char** argv) の形が標準。引数は使わないことも多い。
+int main(int argc, char** argv)
+{
+ unsigned char toggle = 0; // 変数toggleを用意。0=OFF, 1=ON として使う。
+
+```
+// ── PICの初期設定 ──
+OSCCON = 0x40;   // 内部クロックを1MHzに設定
+CMCON0 = 0x07;   // コンパレータ機能を無効化（全てI/Oとして使う）
+ANSEL  = 0x00;   // アナログ入力を無効化（全ピンをデジタルI/Oに）
+TRISIO = 0x08;   // ポート方向設定。bit3(GP3)=1で入力、それ以外は出力
+GPIO   = 0x00;   // 出力ポートを初期化（全部0に）
+
+// 初期出力の設定（外部にNOT回路がある前提）
+MOUSE_UPPER    = 0;  // 出力0 → NOT後=1
+MOUSE_LOWER    = 1;  // 出力1 → NOT後=0
+KEYBOARD_UPPER = 0;  // 出力0 → NOT後=1
+KEYBOARD_LOWER = 1;  // 出力1 → NOT後=0
+LED_SWITCH     = 0;  // 出力0 → NOT後=LED点灯
+
+// ─────────── 無限ループ開始 ───────────
+// while(1) は「常に真」なので、永久に繰り返す処理。
+// マイコンはプログラムをずっと繰り返し続けるのが基本。
+while (1)
+{
+    // SWITCH_IN = GP3 の状態をチェック
+    // if文は「もし〜ならば」という条件分岐
+    if (SWITCH_IN)   // GP3がHigh（スイッチ未押下）なら
+    {
+        if (toggle == 0)  // 前回OFFなら一度だけ実行（チャタリング対策）
+        {
+            // ^= 1 は「ビット反転」
+            // 例: 0 ^ 1 = 1, 1 ^ 1 = 0
+            MOUSE_UPPER    ^= 1;
+            MOUSE_LOWER    ^= 1;
+            KEYBOARD_UPPER ^= 1;
+            KEYBOARD_LOWER ^= 1;
+            LED_SWITCH     ^= 1;
+
+            __delay_ms(20); // スイッチのチャタリング防止（20ms待つ）
+        }
+        toggle = 1;   // 状態をONに更新
+    }
+    else   // GP3がLow（スイッチ押下）
+    {
+        if (toggle)        // 前回ONだったら
+            __delay_ms(20); // 押しっぱなし時の簡易デバウンス
+        toggle = 0;        // 状態をOFFに戻す
+    }
+}
+
+// return は mainの終了値を返す命令。
+// ここには到達しないけど、C言語の形式上は書いておくのが正しい。
+return (EXIT_SUCCESS);
+```
+
+}
