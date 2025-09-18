@@ -39,7 +39,7 @@ PIC12F683を使用したUSBマウス・キーボード切替装置のファー�
 
 **GP3 = H（スイッチ未押下）**
 
-- USB系統1 → ASTERION PC接続
+- USB系統1 → MACHINE PC接続
 - GP0=1, GP5=1 (MACHINE マウス・キーボードON)
 - GP1=0, GP4=0 (GATEWAY PC OFF)
 
