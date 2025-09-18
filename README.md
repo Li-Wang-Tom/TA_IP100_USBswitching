@@ -20,12 +20,12 @@ PIC12F683を使用したUSBマウス・キーボード切替装置のファー�
 
 | ピン  | 機能  | 説明                 |
 | --- | --- | ------------------ |
-| GP0 | 出力  | ASTERION マウス制御     |
+| GP0 | 出力  | MACHINE マウス制御      |
 | GP1 | 出力  | GATEWAY PC マウス制御   |
 | GP2 | 出力  | LED切替制御（NOTゲート経由）  |
 | GP3 | 入力  | 切替スイッチ（プルアップ抵抗付き）  |
 | GP4 | 出力  | GATEWAY PC キーボード制御 |
-| GP5 | 出力  | ASTERION キーボード制御   |
+| GP5 | 出力  | MACHINE キーボード制御    |
 
 ### 回路仕様
 
@@ -40,14 +40,14 @@ PIC12F683を使用したUSBマウス・キーボード切替装置のファー�
 **GP3 = H（スイッチ未押下）**
 
 - USB系統1 → ASTERION PC接続
-- GP0=1, GP5=1 (ASTERION マウス・キーボードON)
+- GP0=1, GP5=1 (MACHINE マウス・キーボードON)
 - GP1=0, GP4=0 (GATEWAY PC OFF)
 
 **GP3 = L（スイッチ押下）**
 
 - USB系統2 → GATEWAY PC接続
 - GP1=1, GP4=1 (GATEWAY PC マウス・キーボードON)
-- GP0=0, GP5=0 (ASTERION OFF)
+- GP0=0, GP5=0 (MACHINE OFF)
 
 ### チャタリング対策機能
 
@@ -107,9 +107,9 @@ See the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 作者
 
-**Technoalpha Tomono**
+**TA Li-Wang-Tom**
 
-- Company: テクノアルファ株式会社
+- GitHub: [@Li-Wang-Tom](https://github.com/Li-Wang-Tom)
 
 ## 🙏 謝辞
 
