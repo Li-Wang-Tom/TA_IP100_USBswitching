@@ -1,36 +1,36 @@
 /*
- * æƒ…å ±
+ * î•ñ
  *      File:main.c
  *      Author:Technoalpha Tomono
  *      PIC:PIC12F683
  * 
- * ãƒãƒ¼ãƒ‰æ§‹æˆ
- *      å…¥åŠ›ã«ã¯ãƒ—ãƒ«ã‚¢ãƒƒãƒ—æŠµæŠ—ã‚’ã¤ã‘ã¦ã„ã‚‹ç‚º
- *      å…¥åŠ›OFFæ™‚ã«å‡ºåŠ›ãŒONã¨ãªã‚‹
- *      GP2ã¯NOTã‚²ãƒ¼ãƒˆã§LEDã®åˆ‡æ›¿ã‚’è¡Œã£ã¦ã„ã‚‹
- *      ã‚¤ãƒ³ãƒãƒ¼ã‚¿ã¯ã‚·ãƒ¥ãƒŸãƒƒãƒˆãƒˆãƒªã‚¬ç„¡ã—
+ * ƒn[ƒh\¬
+ *      “ü—Í‚É‚Íƒvƒ‹ƒAƒbƒv’ïR‚ð‚Â‚¯‚Ä‚¢‚éˆ×
+ *      “ü—ÍOFFŽž‚Éo—Í‚ªON‚Æ‚È‚é
+ *      GP2‚ÍNOTƒQ[ƒg‚ÅLED‚ÌØ‘Ö‚ðs‚Á‚Ä‚¢‚é
+ *      ƒCƒ“ƒo[ƒ^‚ÍƒVƒ…ƒ~ƒbƒgƒgƒŠƒK–³‚µ
  * 
- * ãƒ—ãƒ­ã‚°ãƒ©ãƒ å†…å®¹
- * ã€€   GP3ãŒH(ãƒ—ãƒ«ã‚¢ãƒƒãƒ—æŠµæŠ—æœ‰ã‚Š)
- *      USBç³»çµ±1â†’GP0=1 GP5=1ã«ãªã‚‹ ä»–ã¯0
- *      GP3ãŒL
- *      USBç³»çµ±2â†’GP1=1 GP4=1ã«ãªã‚‹ ä»–ã¯0
+ * ƒvƒƒOƒ‰ƒ€“à—e
+ * @   GP3‚ªH(ƒvƒ‹ƒAƒbƒv’ïR—L‚è)
+ *      USBŒn“1¨GP0=1 GP5=1‚É‚È‚é ‘¼‚Í0
+ *      GP3‚ªL
+ *      USBŒn“2¨GP1=1 GP4=1‚É‚È‚é ‘¼‚Í0
  * 
- *      GP0ã®ON:ASTERION mouseãŒON
- *      GP1ã®ON:GATEWAYPC mouseãŒON 
- *      GP5ã®ON:ASTERION keyboardãŒON
- *      GP4ã®ON:GATEWAYPC keyboardãŒON
- *      GP2ã®ON:LED ONã®åˆ‡æ›¿
+ *      GP0‚ÌON:ASTERION mouse‚ªON
+ *      GP1‚ÌON:GATEWAYPC mouse‚ªON 
+ *      GP5‚ÌON:ASTERION keyboard‚ªON
+ *      GP4‚ÌON:GATEWAYPC keyboard‚ªON
+ *      GP2‚ÌON:LED ON‚ÌØ‘Ö
  * 
- *å…¥åŠ›ãƒãƒ£ã‚¿ãƒªãƒ³ã‚°å¯¾ç­–Ver
+ *“ü—Íƒ`ƒƒƒ^ƒŠƒ“ƒO‘ÎôVer
  */
 
- // â”€â”€ ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ãƒ•ã‚¡ã‚¤ãƒ« â”€â”€ 
+ // „Ÿ„Ÿ ƒCƒ“ƒNƒ‹[ƒhƒtƒ@ƒCƒ‹ „Ÿ„Ÿ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
 
-// â”€â”€ ã‚³ãƒ³ãƒ•ã‚£ã‚°ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ãƒ“ãƒƒãƒˆè¨­å®šï¼ˆæ›¸è¾¼ã¿æ™‚ã«åæ˜ ï¼‰â”€â”€
+// „Ÿ„Ÿ ƒRƒ“ƒtƒBƒOƒŒ[ƒVƒ‡ƒ“ƒrƒbƒgÝ’èi‘ž‚ÝŽž‚É”½‰fj„Ÿ„Ÿ
 #pragma config FOSC = INTOSCIO  // Oscillator Selection bits (INTOSCIO oscillator: I/O function on RA4/OSC2/CLKOUT pin, I/O function on RA5/OSC1/CLKIN)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
 #pragma config PWRTE = ON       // Power-up Timer Enable bit (PWRT enabled)
@@ -41,7 +41,7 @@
 #pragma config IESO = OFF       // Internal External Switchover bit (Internal External Switchover mode is disabled)
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enabled bit (Fail-Safe Clock Monitor is disabled)
 
-// â”€â”€ ãƒžã‚¯ãƒ­ç½®æ› â”€â”€
+// „Ÿ„Ÿ ƒ}ƒNƒ’uŠ· „Ÿ„Ÿ
 #define MOUSE_UPPER       GP0
 #define MOUSE_LOWER       GP5
 #define KEYBOARD_UPPER    GP1
@@ -49,45 +49,45 @@
 #define LED_SWITCH        GP2
 #define SWITCH_IN         GP3
 
-// â”€â”€ é…å»¶é–¢æ•°ã®åŸºæº–ã‚¯ãƒ­ãƒƒã‚¯å‘¨æ³¢æ•°ï¼ˆOSCCONã§è¨­å®šã™ã‚‹å®Ÿã‚¯ãƒ­ãƒƒã‚¯ã¨ä¸€è‡´ã•ã›ã‚‹å¿…è¦ãŒã‚ã‚‹ï¼‰â”€â”€
+// „Ÿ„Ÿ ’x‰„ŠÖ”‚ÌŠî€ƒNƒƒbƒNŽü”g”iOSCCON‚ÅÝ’è‚·‚éŽÀƒNƒƒbƒN‚Æˆê’v‚³‚¹‚é•K—v‚ª‚ ‚éj„Ÿ„Ÿ
 #define _XTAL_FREQ 1000000UL
 
 int main(int argc, char** argv)
 {
     unsigned char toggle = 0;   // 0=OFF, 1=ON
 
-    // 1MHz/ãƒ‡ã‚¸ã‚¿ãƒ«IO/æ–¹å‘è¨­å®š
-    OSCCON = 0x40;              // å†…éƒ¨ã‚¯ãƒ­ãƒƒã‚¯ã‚’1MHzã«è¨­å®š
-    CMCON0 = 0x07;              // ã‚³ãƒ³ãƒ‘ãƒ¬ãƒ¼ã‚¿æ©Ÿèƒ½ã‚’ç„¡åŠ¹åŒ–ï¼ˆå…¨ã¦I/Oã¨ã—ã¦ä½¿ã†
-    ANSEL  = 0x00;              // ã‚¢ãƒŠãƒ­ã‚°å…¥åŠ›ã‚’ç„¡åŠ¹åŒ–ï¼ˆå…¨ãƒ”ãƒ³ã‚’ãƒ‡ã‚¸ã‚¿ãƒ«I/Oã«)
-    TRISIO = 0x08;              // ãƒãƒ¼ãƒˆæ–¹å‘è¨­å®šã€‚bit3(GP3)=1ã§å…¥åŠ›ã€ãã‚Œä»¥å¤–ã¯å‡ºåŠ›
-    GPIO   = 0x00;              // å‡ºåŠ›ãƒãƒ¼ãƒˆã‚’åˆæœŸåŒ–ï¼ˆé›»æºæŠ•å…¥æ™‚ã®ä¸å®šçŠ¶æ…‹å›žé¿ã®ç‚ºå…¨ã¦0ã«ï¼‰
+    // 1MHz/ƒfƒWƒ^ƒ‹IO/•ûŒüÝ’è
+    OSCCON = 0x40;              // “à•”ƒNƒƒbƒN‚ð1MHz‚ÉÝ’è
+    CMCON0 = 0x07;              // ƒRƒ“ƒpƒŒ[ƒ^‹@”\‚ð–³Œø‰»i‘S‚ÄI/O‚Æ‚µ‚ÄŽg‚¤
+    ANSEL  = 0x00;              // ƒAƒiƒƒO“ü—Í‚ð–³Œø‰»i‘Sƒsƒ“‚ðƒfƒWƒ^ƒ‹I/O‚É)
+    TRISIO = 0x08;              // ƒ|[ƒg•ûŒüÝ’èBbit3(GP3)=1‚Å“ü—ÍA‚»‚êˆÈŠO‚Ío—Í
+    GPIO   = 0x00;              // o—Íƒ|[ƒg‚ð‰Šú‰»i“dŒ¹“Š“üŽž‚Ì•s’èó‘Ô‰ñ”ð‚Ìˆ×‘S‚Ä0‚Éj
 
-    // åˆæœŸå‡ºåŠ›ï¼ˆLEDã¯ã‚¤ãƒ³ãƒãƒ¼ã‚¿ã§åˆ‡ã‚Šæ›¿ãˆå‡¦ç†ã‚’ã—ã¦ã„ã‚‹ï¼‰
-    MOUSE_UPPER    = 0;         // NOTå¾Œ=1
-    MOUSE_LOWER    = 1;         // NOTå¾Œ=0
-    KEYBOARD_UPPER = 0;         // NOTå¾Œ=1
-    KEYBOARD_LOWER = 1;         // NOTå¾Œ=0
-    LED_SWITCH     = 0;         // NOTå¾Œ=LED ON
+    // ‰Šúo—ÍiLED‚ÍƒCƒ“ƒo[ƒ^‚ÅØ‚è‘Ö‚¦ˆ—‚ð‚µ‚Ä‚¢‚éj
+    MOUSE_UPPER    = 0;         // NOTŒã=1
+    MOUSE_LOWER    = 1;         // NOTŒã=0
+    KEYBOARD_UPPER = 0;         // NOTŒã=1
+    KEYBOARD_LOWER = 1;         // NOTŒã=0
+    LED_SWITCH     = 0;         // NOTŒã=LED ON
 
     while (1)
     {
-        if (SWITCH_IN)          // GP3 = Highï¼ˆHigh=æœªæŠ¼ä¸‹ãƒ»å¤–éƒ¨ã§ãƒ—ãƒ«ã‚¢ãƒƒãƒ—ï¼‰
+        if (SWITCH_IN)          // GP3 = HighiHigh=–¢‰Ÿ‰ºEŠO•”‚Åƒvƒ‹ƒAƒbƒvj
         {
-            if (toggle == 0)    // å‰å›žOFFãªã‚‰ä¸€åº¦ã ã‘åè»¢
-            {                   // ^= 1 ã¯ãƒ“ãƒƒãƒˆåè»¢
-                                // ä¾‹: 0 ^ 1 = 1, 1 ^ 1 = 0
+            if (toggle == 0)    // ‘O‰ñOFF‚È‚çˆê“x‚¾‚¯”½“]
+            {                   // ^= 1 ‚Íƒrƒbƒg”½“]
+                                // —á: 0 ^ 1 = 1, 1 ^ 1 = 0
                 MOUSE_UPPER    ^= 1;
                 MOUSE_LOWER    ^= 1;
                 KEYBOARD_UPPER ^= 1;
                 KEYBOARD_LOWER ^= 1;
                 LED_SWITCH     ^= 1;
 
-                __delay_ms(20); // æŒ‡ã®æ„Ÿè¦šå¸åŽç”¨ãƒ‡ãƒã‚¦ãƒ³ã‚¹
+                __delay_ms(20); // Žw‚ÌŠ´Šo‹zŽû—pƒfƒoƒEƒ“ƒX
             }
             toggle = 1;
         }
-        else                    // GP3 = Lowï¼ˆLow=æŠ¼ä¸‹ï¼‰
+        else                    // GP3 = LowiLow=‰Ÿ‰ºj
         {
             if (toggle)
                 __delay_ms(20);
@@ -95,5 +95,5 @@ int main(int argc, char** argv)
         }
     }
 
-    return (EXIT_SUCCESS);      // å½¢å¼ä¸Š
+    return (EXIT_SUCCESS);      // Œ`Ž®ã
 }
